@@ -6,9 +6,16 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "80:80"
+      - "${PORT:-80}:80"
     volumes:
       - .:/var/www/html
     # Add environment variables if needed
     # environment:
     #   - VARIABLE_NAME=value
+    environment:
+      - PORT=${PORT:-80}
+      # Add database connection variables
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
